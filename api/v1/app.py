@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" api file """
 
 from flask import Flask
 from models import storage
@@ -9,12 +10,11 @@ app = Flask(__name__)
 app.register_blueprint(app_views)
 
 
+@app.teardown_appcontext
 def teardown_storage(exception):
     """Teardown method to close the storage."""
     storage.close()
 
-
-app.teardown_appcontext(teardown_storage)
 
 if __name__ == "__main__":
     host = os.getenv("HBNB_API_HOST", "0.0.0.0")
