@@ -1,17 +1,22 @@
 #!/usr/bin/python3
-
-from api.v1.views import app_views
+"""
+Module that returns the status route
+"""
 from flask import jsonify
+from . import app_views
 from models import storage
 
 
 @app_views.route("/status", methods=["GET"], strict_slashes=False)
-def get_status():
-    """Returns a JSON with status OK"""
+def status():
+    """
+    Return the status of the API
+    """
     return jsonify({"status": "OK"})
 
+
 @app_views.route("/stats", methods=["GET"], strict_slashes=False)
-def get_status():
+def stats():
     """
     Return the number of objects by type
     """
