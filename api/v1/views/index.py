@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Module that returns the status route
+This module contains the status route
 """
 from flask import jsonify
 from . import app_views
@@ -8,7 +8,7 @@ from models import storage
 
 
 @app_views.route("/status", methods=["GET"], strict_slashes=False)
-def status():
+def get_status():
     """
     Return the status of the API
     """
@@ -16,19 +16,17 @@ def status():
 
 
 @app_views.route("/stats", methods=["GET"], strict_slashes=False)
-def stats():
+def get_stats():
     """
     Return the number of objects by type
     """
-
-
-def get_stats():
-    stats = {
-        "amenities": storage.count("Amenity"),
-        "cities": storage.count("City"),
-        "places": storage.count("Place"),
-        "reviews": storage.count("Review"),
-        "states": storage.count("State"),
-        "users": storage.count("User"),
+    total_objects = {
+        "amenities": storage.count('Amenity'),
+        "cities": storage.count('City'),
+        "places": storage.count('Place'),
+        "reviews": storage.count('Review'),
+        "states": storage.count('State'),
+        "users": storage.count('User')
     }
-    return jsonify(stats)
+
+    return jsonify(total_objects)
