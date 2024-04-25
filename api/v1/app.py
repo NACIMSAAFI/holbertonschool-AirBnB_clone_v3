@@ -9,6 +9,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
+app.register_blueprint(app_views)
 
 
 @app.teardown_appcontext
@@ -17,15 +18,13 @@ def teardown_storage(exception):
     storage.close()
 
 
-@app_views.route("/nop", methods=["GET"], strict_slashes=False)
-def get_nop():
+@app.errorhandler(404)
+def get_nop(error):
     """
     Return “404 page”, a “Not found”
     """
-    return jsonify({"error": "Not found"})
+    return jsonify({"error": "Not found"}), 404
 
-
-app.register_blueprint(app_views)
 
 if __name__ == "__main__":
     host = os.getenv("HBNB_API_HOST", "0.0.0.0")
