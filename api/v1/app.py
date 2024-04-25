@@ -19,7 +19,7 @@ def teardown_storage(exception=None):
 
 
 @app.errorhandler(404)
-def get_nop(error):
+def page_not_found(error):
     """
     Return “404 page”, a “Not found”
     """
