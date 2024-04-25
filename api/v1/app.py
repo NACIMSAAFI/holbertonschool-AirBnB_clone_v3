@@ -17,12 +17,14 @@ def teardown_storage(exception=None):
     """Teardown method to close the storage."""
     storage.close()
 
+
 @app.errorhandler(404)
 def page_not_found(error):
     """
     Return “404 page”, a “Not found”
     """
     return jsonify({"error": "Not found"}), 404
+
 
 if __name__ == "__main__":
     host = os.getenv("HBNB_API_HOST", "0.0.0.0")
