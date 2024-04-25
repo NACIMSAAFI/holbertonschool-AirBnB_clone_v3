@@ -13,7 +13,7 @@ app.register_blueprint(app_views)
 
 
 @app.teardown_appcontext
-def teardown_storage(exception):
+def teardown_storage(exception=None):
     """Teardown method to close the storage."""
     storage.close()
 
